@@ -6,10 +6,16 @@ import os
 load_dotenv()
 
 DATABASE_URL=str(os.getenv("DATABASE_URL"))
-AUTH_TOKEN=str(os.getenv("Turbo_Token"))
+AUTH_TOKEN=str(os.getenv("TURBO_TOKEN"))
 class Model(DeclarativeBase):
     pass 
+    """_summary_
 
+engine = create_engine(
+    DATABASE_URL , 
+    echo=True
+)
+    """
 engine = create_engine(
     
         f"sqlite+libsql://{DATABASE_URL.removeprefix('libsql://')}?secure=true",
@@ -17,7 +23,7 @@ engine = create_engine(
         "auth_token": AUTH_TOKEN,
     },
 
-    echo=True ,
+    echo=False ,
     
 )
 
