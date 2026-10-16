@@ -20,7 +20,7 @@ class Article(Model, TimeStamp):
     name: Mapped[str] = mapped_column(String(128), nullable=False)
     content: Mapped[str] = mapped_column(Text)
     author: Mapped[str] = mapped_column(String(128), nullable=False)
-    banner: Mapped[str] = mapped_column(String(258))
+    banner: Mapped[str] = mapped_column(Text)
     tags: Mapped[str] = mapped_column(String(256))
     connect: Mapped[str] = mapped_column(String(128))
     youtube_ref: Mapped[str] = mapped_column(String(128))

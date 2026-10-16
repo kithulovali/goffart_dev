@@ -1,5 +1,5 @@
 from typing import Optional
-from pydantic import BaseModel 
+from pydantic import BaseModel, ConfigDict
 from uuid import UUID
 from datetime import datetime
 
@@ -7,10 +7,10 @@ class ProjectCreate(BaseModel):
     
     title : str 
     description : Optional[str] = None
-    banner : Optional[str] = None
     tags : str 
     connect :str 
     contribute : str 
+    profile_id: UUID
     
 class ProjectRead(BaseModel):
     
@@ -24,16 +24,12 @@ class ProjectRead(BaseModel):
     created_at : Optional[datetime] = None 
     updated_at : Optional[datetime] = None 
     
-    class config :
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class ProjectUpdate(BaseModel):
     
-    title : Optional[str] 
+    title : Optional[str] = None
     description : Optional[str] = None
-    banner : Optional[str] = None
     tags : Optional[str] = None
     connect :Optional[str] = None 
     contribute : Optional[str]  = None
-    created_at : Optional[datetime] = None 
-    updated_at : Optional[datetime] = None 

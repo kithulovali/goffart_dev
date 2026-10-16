@@ -1,4 +1,4 @@
-from pydantic import BaseModel 
+from pydantic import BaseModel, ConfigDict
 from typing import Optional 
 from datetime import datetime 
 from uuid import UUID
@@ -9,9 +9,9 @@ class ArticleCreate(BaseModel) :
     content : Optional[str] = None  
     connect : str
     author  : str
-    banner  : Optional[str] = None 
     tags : Optional[str] = None
     youtube_ref : str
+    profile_id: UUID
     
     
 class ArticleRead(BaseModel):
@@ -27,8 +27,7 @@ class ArticleRead(BaseModel):
     created_at  : Optional[datetime] = None
     updated_at  : Optional[datetime] = None
     
-    class config :
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
     
 class ArticleUpdate(BaseModel):
     
@@ -37,6 +36,5 @@ class ArticleUpdate(BaseModel):
     content :Optional[str] = None
     connect : Optional[str] = None
     author :Optional[str] = None
-    banner :Optional[str] = None
     tags  : Optional[str] = None
     youtube_ref : Optional[str] = None

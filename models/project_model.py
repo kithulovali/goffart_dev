@@ -4,7 +4,7 @@ from settings import Model
 from models.utils import TimeStamp
 from typing import TYPE_CHECKING
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import String, Uuid, ForeignKey
+from sqlalchemy import String, Text, Uuid, ForeignKey
 import uuid
 
 if TYPE_CHECKING:
@@ -19,7 +19,7 @@ class Project(Model, TimeStamp):
     private_id: Mapped[uuid.UUID] = mapped_column(Uuid, unique=True, primary_key=True, default=uuid.uuid4)
     title: Mapped[str] = mapped_column(String(128), nullable=False, unique=True)
     description: Mapped[str] = mapped_column(String(256))
-    banner: Mapped[str] = mapped_column(String(256))
+    banner: Mapped[str] = mapped_column(Text)
     tags: Mapped[str] = mapped_column(String(256))
     connect: Mapped[str] = mapped_column(String(256))
     contribute: Mapped[str] = mapped_column(String(256))

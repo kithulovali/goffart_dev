@@ -1,4 +1,4 @@
-from pydantic import BaseModel , EmailStr 
+from pydantic import BaseModel, ConfigDict, EmailStr
 from uuid import UUID
 from typing import Optional
 from datetime import datetime 
@@ -8,7 +8,6 @@ class ProfileCreate(BaseModel):
     name : str 
     email : EmailStr
     about : Optional[str] = None
-    Banner : Optional[str] = None
     contact : Optional[str] = None 
     
 class ReadProfile(BaseModel):
@@ -17,13 +16,12 @@ class ReadProfile(BaseModel):
     name : str 
     about : str 
     email : EmailStr
-    Banner : str
+    banner: str
     contact : str
-    create_at : Optional[datetime] = None
+    created_at : Optional[datetime] = None
     updated_at : Optional[datetime] = None 
     
-    class config :
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
     
 
     
@@ -31,6 +29,5 @@ class UpdateProfile(BaseModel):
 
     name : Optional[str] = None
     about : Optional[str] = None
-    email : Optional[str] = None
-    Banner : Optional[str] = None
+    email : Optional[EmailStr] = None
     contact : Optional[str] = None
