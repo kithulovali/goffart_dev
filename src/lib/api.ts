@@ -1,6 +1,7 @@
 import type { Article, Profile, Project } from '../types';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL ?? '';
+const API_BASE = import.meta.env.VITE_API_BASE_URL
+  || (import.meta.env.PROD ? 'https://goffart-dev-1.onrender.com' : '');
 const ADMIN_TOKEN_KEY = 'goffart-admin-token';
 
 export function getAdminToken(): string | null {

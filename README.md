@@ -35,6 +35,11 @@ npm run dev -- --host 0.0.0.0
 ```
 
 The frontend proxies API calls through Vite to the FastAPI app on `http://localhost:8001` and provides the public portfolio pages plus the `/admin` dashboard.
+The production frontend uses `https://goffart-dev-1.onrender.com` by default.
+Set `VITE_API_BASE_URL` in the frontend deployment environment to override it.
+The API allows the production site origin `https://goffartdev-src.vercel.app`
+by default. Set `FRONTEND_ORIGINS` on the API deployment to a comma-separated
+list if you use additional production domains.
 Technology tags may be entered as comma-separated values or as space-separated
 hashtags (for example, `#arduino #python`). Recognized technologies link to
 their official websites; unrecognized tags link to a search for official
