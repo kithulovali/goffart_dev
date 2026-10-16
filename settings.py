@@ -14,21 +14,14 @@ ADMIN_API_TOKEN = os.getenv("ADMIN_API_TOKEN")
 class Model(DeclarativeBase):
     pass
 
-    """_summary_
-
-    Yields:
-        _type_: _description_
-        if DATABASE_URL.startswith("libsql://"):
+if DATABASE_URL.startswith("libsql://"):
     engine = create_engine(
         f"sqlite+libsql://{DATABASE_URL.removeprefix('libsql://')}?secure=true",
         connect_args={"auth_token": AUTH_TOKEN},
         echo=False,
     )
 else:
-    """
-
-    
-engine = create_engine(DATABASE_URL, echo=False)
+   engine = create_engine(DATABASE_URL, echo=False)
 
 
 sessio_local = sessionmaker(
