@@ -25,6 +25,7 @@ google-cloud-storage==3.17.0
 google-crc32c==1.9.0
 google-resumable-media==2.11.0
 googleapis-common-protos==1.75.5
+greenlet==3.5.6
 grpcio==1.84.0
 grpcio-status==1.84.0
 h11==0.16.0
@@ -36,6 +37,7 @@ httpx==0.28.1
 hyperframe==6.1.0
 idna==3.20
 Jinja2==3.1.6
+libsql-experimental==0.0.55
 markdown-it-py==4.2.0
 MarkupSafe==3.0.4
 mdurl==0.1.2
@@ -71,6 +73,7 @@ sentry-sdk==2.72.0
 shellingham==1.5.4
 six==1.17.0
 SQLAlchemy==2.1.4
+sqlalchemy-libsql==0.2.0
 starlette==1.8.0
 typer==0.27.3
 typing-inspection==0.4.4
