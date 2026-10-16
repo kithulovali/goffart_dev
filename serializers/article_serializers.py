@@ -12,6 +12,19 @@ class ArticleCreate(BaseModel) :
     tags : Optional[str] = None
     youtube_ref : str
     profile_id: UUID
+    project_id: Optional[UUID] = None
+
+
+class ArticleProjectRead(BaseModel):
+    public_id: UUID
+    title: str
+    description: Optional[str] = None
+    banner: Optional[str] = None
+    tags: str
+    connect: str
+    contribute: str
+
+    model_config = ConfigDict(from_attributes=True)
     
     
 class ArticleRead(BaseModel):
@@ -24,6 +37,7 @@ class ArticleRead(BaseModel):
     banner :str
     tags  : str
     youtube_ref :str
+    project: Optional[ArticleProjectRead] = None
     created_at  : Optional[datetime] = None
     updated_at  : Optional[datetime] = None
     
@@ -38,3 +52,4 @@ class ArticleUpdate(BaseModel):
     author :Optional[str] = None
     tags  : Optional[str] = None
     youtube_ref : Optional[str] = None
+    project_id: Optional[UUID] = None

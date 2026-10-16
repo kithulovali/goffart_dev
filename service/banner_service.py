@@ -42,6 +42,19 @@ def upload_banner(
             status_code=status.HTTP_413_CONTENT_TOO_LARGE,
             detail="Banner images must be 10 MB or smaller.",
         )
+    signature = file.read(12)
+    file.seek(position)
+    valid_signature = {
+        "image/jpeg": signature.startswith(b"\xff\xd8\xff"),
+        "image/png": signature.startswith(b"\x89PNG\r\n\x1a\n"),
+        "image/webp": signature.startswith(b"RIFF") and signature[8:12] == b"WEBP",
+        "image/gif": signature.startswith((b"GIF87a", b"GIF89a")),
+    }[content_type]
+    if not valid_signature:
+        raise HTTPException(
+            status_code=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
+            detail="The uploaded file content does not match its image type.",
+        )
 
     if not os.getenv("CLOUDINARY_URL"):
         raise HTTPException(

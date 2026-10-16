@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends, File, Form, HTTPException, Query, Respon
 from pydantic import EmailStr
 from sqlalchemy.orm import Session
 
+from apis.auth import require_admin
 from apis.utils import run_write
 from serializers.profile_serializers import ProfileCreate, ReadProfile, UpdateProfile
 from service.profile_service import ProfileService
@@ -43,7 +44,12 @@ def profile_update_form(
     return UpdateProfile(**values)
 
 
-@router.post("", response_model=ReadProfile, status_code=status.HTTP_201_CREATED)
+@router.post(
+    "",
+    response_model=ReadProfile,
+    status_code=status.HTTP_201_CREATED,
+    dependencies=[Depends(require_admin)],
+)
 def create_profile(
     data: Annotated[ProfileCreate, Depends(profile_create_form)],
     db: Database,
@@ -94,7 +100,11 @@ def get_profile(public_id: UUID, db: Database) -> ReadProfile:
     return ReadProfile.model_validate(profile)
 
 
-@router.patch("/{public_id}", response_model=ReadProfile)
+@router.patch(
+    "/{public_id}",
+    response_model=ReadProfile,
+    dependencies=[Depends(require_admin)],
+)
 def update_profile(
     public_id: UUID,
     db: Database,
@@ -124,7 +134,11 @@ def update_profile(
     return ReadProfile.model_validate(profile)
 
 
-@router.delete("/{public_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete(
+    "/{public_id}",
+    status_code=status.HTTP_204_NO_CONTENT,
+    dependencies=[Depends(require_admin)],
+)
 def delete_profile(public_id: UUID, db: Database) -> Response:
     deleted = run_write(db, lambda: ProfileService(db).delete(public_id))
     if not deleted:

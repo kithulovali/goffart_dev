@@ -4,6 +4,7 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, File, Form, HTTPException, Query, Response, UploadFile, status
 from sqlalchemy.orm import Session
 
+from apis.auth import require_admin
 from apis.utils import run_write
 from serializers.project_serializers import ProjectCreate, ProjectRead, ProjectUpdate
 from service.project_service import ProjectService
@@ -53,7 +54,12 @@ def project_update_form(
     return ProjectUpdate(**values)
 
 
-@router.post("", response_model=ProjectRead, status_code=status.HTTP_201_CREATED)
+@router.post(
+    "",
+    response_model=ProjectRead,
+    status_code=status.HTTP_201_CREATED,
+    dependencies=[Depends(require_admin)],
+)
 def create_project(
     data: Annotated[ProjectCreate, Depends(project_create_form)],
     db: Database,
@@ -107,7 +113,11 @@ def get_project(public_id: UUID, db: Database) -> ProjectRead:
     return ProjectRead.model_validate(project)
 
 
-@router.patch("/{public_id}", response_model=ProjectRead)
+@router.patch(
+    "/{public_id}",
+    response_model=ProjectRead,
+    dependencies=[Depends(require_admin)],
+)
 def update_project(
     public_id: UUID,
     db: Database,
@@ -137,7 +147,11 @@ def update_project(
     return ProjectRead.model_validate(project)
 
 
-@router.delete("/{public_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete(
+    "/{public_id}",
+    status_code=status.HTTP_204_NO_CONTENT,
+    dependencies=[Depends(require_admin)],
+)
 def delete_project(public_id: UUID, db: Database) -> Response:
     deleted = run_write(db, lambda: ProjectService(db).delete(public_id))
     if not deleted:
