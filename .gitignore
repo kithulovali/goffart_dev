@@ -1,15 +1,11 @@
-node_modules/
-dist/
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
-*.py[codz]
+*.py[cod]
 *$py.class
-
-# C extensions
 *.so
+.python-version
 
-# Distribution / packaging
+# Python build and packaging
 .Python
 build/
 develop-eggs/
@@ -17,40 +13,55 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
 parts/
 sdist/
-var/
 wheels/
+lib64/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
 MANIFEST
 
-# PyInstaller
-#   Usually these files are written by a python script from a template
-#   before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
+# Root-level library directories only
+/lib/
 
-# Installer logs
+# Python environments
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+!.env.sample
+.envrc
+
+# Databases and local data
+*.db
+*.sqlite
+*.sqlite3
+*.sqlite-journal
+*.sqlite3-journal
+
+# Logs
+*.log
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Unit test / coverage reports
-htmlcov/
+# Testing and coverage
+.pytest_cache/
 .tox/
 .nox/
 .coverage
 .coverage.*
-.cache
-nosetests.xml
+htmlcov/
 coverage.xml
-*.cover
-*.py.cover
-*.lcov
+nosetests.xml
 .hypothesis/
 .pytest_cache/
 cover/
@@ -154,7 +165,6 @@ activemq-data/
 
 # Environments
 .env
-.env.local
 .envrc
 .venv
 env/
@@ -177,36 +187,48 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
-
-# Pyre type checker
 .pyre/
-
-# pytype static type analyzer
 .pytype/
+.ruff_cache/
+.pyright/
 
-# Cython debug symbols
-cython_debug/
+# Frontend dependencies
+node_modules/
 
-# PyCharm
-#   JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#   be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#   and can be added to the global gitignore or merged into this file.  For a more nuclear
-#   option (not recommended) you can uncomment the following to ignore the entire idea folder.
-# .idea/
+# Vite and frontend build output
+dist/
+.vite/
+*.local
 
-# Abstra
-#   Abstra is an AI-powered process automation framework.
-#   Ignore directories containing user credentials, local state, and settings.
-#   Learn more at https://abstra.io/docs
-.abstra/
+# Frontend environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Visual Studio Code
-#   Visual Studio Code specific template is maintained in a separate VisualStudioCode.gitignore that
-#   can be found at https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
-#   and can be added to the global gitignore or merged into this file. However, if you prefer, you
-#   could uncomment the following to ignore the entire vscode folder
-# .vscode/
-# Temporary file for partial code execution
+# IDE and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Documentation build
+/site/
+docs/_build/
+
+# Temporary files
 tempCodeRunnerFile.py
 
 # Ruff stuff:
@@ -222,5 +244,3 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
-datatbase.db 
-.env.example
