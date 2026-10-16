@@ -9,8 +9,16 @@ DATABASE_URL=str(os.getenv("DATABASE_URL"))
 AUTH_TOKEN=str(os.getenv("TURBO_TOKEN"))
 class Model(DeclarativeBase):
     pass 
+
     """_summary_
     engine = create_engine(
+    DATABASE_URL , 
+    echo=True
+)
+    """
+
+
+engine = create_engine(
     
         f"sqlite+libsql://{DATABASE_URL.removeprefix('libsql://')}?secure=true",
     connect_args={
@@ -19,14 +27,6 @@ class Model(DeclarativeBase):
 
     echo=False ,
     
-)
-
-
-    """
-
-engine = create_engine(
-    DATABASE_URL , 
-    echo=True
 )
 
 sessio_local = sessionmaker(
